@@ -5,11 +5,18 @@
  * Builds the project and uploads files via FTP
  */
 
-const ftp = require('basic-ftp');
-const fs = require('fs-extra');
-const path = require('path');
-const { execSync } = require('child_process');
-require('dotenv').config();
+import ftp from 'basic-ftp';
+import fs from 'fs-extra';
+import path from 'path';
+import { execSync } from 'child_process';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 class FTPDeployer {
   constructor() {
