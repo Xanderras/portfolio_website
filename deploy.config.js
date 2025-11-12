@@ -5,7 +5,7 @@
  * For security, FTP credentials should be stored in environment variables.
  */
 
-module.exports = {
+export default {
   // FTP Server Configuration
   ftp: {
     // InfinityFree FTP settings (replace with your actual details)

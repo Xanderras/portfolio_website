@@ -12,6 +12,7 @@ import { execSync } from 'child_process';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import deployConfig from '../deploy.config.js';
 
 dotenv.config();
 
@@ -31,8 +32,6 @@ class FTPDeployer {
   }
 
   loadConfig() {
-    const deployConfig = require('../deploy.config.js');
-
     return {
       host: process.env.FTP_HOST || deployConfig.ftp.host,
       port: process.env.FTP_PORT || deployConfig.ftp.port || 21,
@@ -241,11 +240,12 @@ class FTPDeployer {
 }
 
 // Run deployment if called directly
-if (require.main === module) {
+const isMainModule = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+if (isMainModule) {
   FTPDeployer.run().catch(error => {
     console.error('💥 Deployment script failed:', error.message);
     process.exit(1);
   });
 }
 
-module.exports = FTPDeployer;
+export default FTPDeployer;
