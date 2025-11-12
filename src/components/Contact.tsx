@@ -90,7 +90,7 @@ export function Contact() {
 
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000);
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -146,7 +146,7 @@ export function Contact() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            {contactInfo.map((info, index) => {
+            {contactInfo.map((info) => {
               const ledColor = {
                 amber: 'bg-amber-500 shadow-amber-500/50',
                 green: 'bg-green-500 shadow-green-500/50',

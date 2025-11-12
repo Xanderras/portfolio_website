@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 interface LEDMatrixProps {
   text: string;
@@ -10,71 +10,71 @@ export function LEDMatrix({ text, color = 'amber' }: LEDMatrixProps) {
   const [activePattern, setActivePattern] = useState<boolean[][]>([]);
 
   // Simple LED dot patterns for characters (5x7 grid)
-  const charPatterns: { [key: string]: boolean[][] } = {
+  const charPatterns = useMemo<{ [key: string]: boolean[][] }>(() => ({
     'A': [
-      [0,1,1,1,0],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
-      [1,1,1,1,1],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
+      [false,true,true,true,false],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
+      [true,true,true,true,true],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
     ],
     'D': [
-      [1,1,1,1,0],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
-      [1,1,1,1,0],
+      [true,true,true,true,false],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
+      [true,true,true,true,false],
     ],
     'E': [
-      [1,1,1,1,1],
-      [1,0,0,0,0],
-      [1,0,0,0,0],
-      [1,1,1,1,0],
-      [1,0,0,0,0],
-      [1,0,0,0,0],
-      [1,1,1,1,1],
+      [true,true,true,true,true],
+      [true,false,false,false,false],
+      [true,false,false,false,false],
+      [true,true,true,true,false],
+      [true,false,false,false,false],
+      [true,false,false,false,false],
+      [true,true,true,true,true],
     ],
     'N': [
-      [1,0,0,0,1],
-      [1,1,0,0,1],
-      [1,0,1,0,1],
-      [1,0,0,1,1],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
+      [true,false,false,false,true],
+      [true,true,false,false,true],
+      [true,false,true,false,true],
+      [true,false,false,true,true],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
     ],
     'R': [
-      [1,1,1,1,0],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
-      [1,1,1,1,0],
-      [1,0,1,0,0],
-      [1,0,0,1,0],
-      [1,0,0,0,1],
+      [true,true,true,true,false],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
+      [true,true,true,true,false],
+      [true,false,true,false,false],
+      [true,false,false,true,false],
+      [true,false,false,false,true],
     ],
     'X': [
-      [1,0,0,0,1],
-      [1,0,0,0,1],
-      [0,1,0,1,0],
-      [0,0,1,0,0],
-      [0,1,0,1,0],
-      [1,0,0,0,1],
-      [1,0,0,0,1],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
+      [false,true,false,true,false],
+      [false,false,true,false,false],
+      [false,true,false,true,false],
+      [true,false,false,false,true],
+      [true,false,false,false,true],
     ],
     ' ': [
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0],
-      [0,0,0,0,0],
+      [false,false,false,false,false],
+      [false,false,false,false,false],
+      [false,false,false,false,false],
+      [false,false,false,false,false],
+      [false,false,false,false,false],
+      [false,false,false,false,false],
+      [false,false,false,false,false],
     ],
-  };
+  }), []);
 
   useEffect(() => {
     const pattern: boolean[][] = [];
@@ -95,7 +95,7 @@ export function LEDMatrix({ text, color = 'amber' }: LEDMatrixProps) {
     }
 
     setActivePattern(pattern);
-  }, [text]);
+  }, [text, charPatterns]);
 
   const colorClasses = {
     amber: 'bg-amber-500 shadow-amber-500/60',
