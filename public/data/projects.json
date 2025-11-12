@@ -1,0 +1,25 @@
+{
+  "projects": [
+    {
+      "id": "mega-platform",
+      "title": "MEGA - Student Association Platform",
+      "description": "A complete web platform developed for my student association MEGA as webmaster. The platform offers extensive functionalities for members, events, activities and association management.",
+      "tags": ["PHP", "Vue.js", "SQL"],
+      "image": "/assets/images/project-mega.png",
+      "link": "https://mega.skghendt.be/",
+      "github": "https://github.com/MEGA-Odisee/website",
+      "featured": true,
+      "priority": 1
+    },
+    {
+      "id": "personal-website",
+      "title": "Personal Portfolio Website",
+      "description": "My personal portfolio website showcasing my projects, skills, and experience as a developer. Built with modern web technologies to ensure responsiveness and performance.",
+      "tags": ["React", "Next.js", "CSS"],
+      "image": "/assets/images/Portfolio_website.png",
+      "link": "https://xanderrasschaert.great-site.net/?i=1",
+      "featured": true,
+      "priority": 2
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom colors using oklch color space */
+  --color-background: oklch(0% 0 0); /* Pure black */
+  --color-foreground: oklch(100% 0 0); /* White */
+
+  --color-card: oklch(15.9% 0.01 240); /* zinc-950 */
+  --color-card-foreground: oklch(100% 0 0);
+
+  --color-primary: oklch(68% 0.18 65); /* amber-500 */
+  --color-primary-foreground: oklch(0% 0 0);
+
+  --color-secondary: oklch(60% 0.18 155); /* green-500 */
+  --color-secondary-foreground: oklch(100% 0 0);
+
+  --color-accent: oklch(68% 0.19 45); /* orange-500 */
+  --color-accent-foreground: oklch(100% 0 0);
+
+  --color-muted: oklch(25% 0.01 240); /* zinc-800 */
+  --color-muted-foreground: oklch(64.9% 0.01 240); /* zinc-400 */
+
+  --color-border: oklch(25% 0.01 240); /* zinc-800 */
+  --color-ring: oklch(68% 0.18 65);
+
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    @apply bg-black text-white/90;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: "opsz" auto;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Circuit grid pattern */
+  .circuit-grid {
+    background-image:
+      linear-gradient(to right, rgba(245, 158, 11, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Fine grid pattern for cards */
+  .fine-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* LED glow effects */
+  .led-amber {
+    @apply w-2 h-2 rounded-full bg-amber-500;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.7), 0 0 20px rgba(245, 158, 11, 0.4);
+  }
+
+  .led-green {
+    @apply w-2 h-2 rounded-full bg-green-500;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.7), 0 0 20px rgba(34, 197, 94, 0.4);
+  }
+
+  .led-orange {
+    @apply w-2 h-2 rounded-full bg-orange-500;
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.7), 0 0 20px rgba(249, 115, 22, 0.4);
+  }
+
+  /* Glowing text */
+  .glow-amber {
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.5), 0 0 40px rgba(245, 158, 11, 0.3);
+  }
+
+  /* PCB trace line */
+  .pcb-trace-vertical {
+    @apply w-0.5 bg-gradient-to-b from-transparent via-amber-500/30 to-transparent;
+  }
+
+  .pcb-trace-horizontal {
+    @apply h-0.5 bg-gradient-to-r from-transparent via-amber-500/30 to-transparent;
+  }
+}
+
+/* Animation for pulsing LEDs */
+@keyframes led-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-led-pulse {
+  animation: led-pulse 3s ease-in-out infinite;
+}
+
+/* Circuit line drawing animation */
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-line 2s ease-in-out forwards;
+}
