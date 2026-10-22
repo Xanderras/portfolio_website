@@ -25,20 +25,22 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
+
+    - name: 🥟 Setup Bun
+      uses: oven-sh/setup-bun@v2
 
     # Install dependencies
     - name: 📦 Install Dependencies
-      run: npm ci
+      run: bun install --frozen-lockfile
 
     # Run linting checks
     - name: 🔍 Run Code Quality Checks
       run: |
-        npm run lint || echo "Linting completed with warnings"
+        bun run lint || echo "Linting completed with warnings"
 
     # Build the project
     - name: 🔨 Build Project
-      run: npm run build
+      run: bun run build
 
     # Verify build output
     - name: ✅ Verify Build Output
@@ -87,13 +89,15 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
+
+    - name: 🥟 Setup Bun
+      uses: oven-sh/setup-bun@v2
 
     - name: 📦 Install Dependencies
-      run: npm ci
+      run: bun install --frozen-lockfile
 
     - name: 🔨 Build Project
-      run: npm run build
+      run: bun run build
 
     - name: 📁 Create Deployment Artifact
       uses: actions/upload-artifact@v4

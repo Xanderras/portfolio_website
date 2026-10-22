@@ -84,7 +84,7 @@ class FTPDeployer {
   async buildProject() {
     try {
       this.log('🔨 Building project for production...');
-      execSync('npm run build', { stdio: 'inherit' });
+      execSync('bun run build', { stdio: 'inherit' });
       this.log('Build completed successfully!', 'success');
     } catch (error) {
       this.log(`Build failed: ${error.message}`, 'error');
