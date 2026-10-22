@@ -66,8 +66,19 @@ export const SKILLS = [
   { group: 'Ways of working', items: ['Teamwork', 'Solution-oriented', 'Critical thinking', 'Fast learner', 'Adaptable', 'Persistent'] },
 ];
 
-export const PINS_LEFT = ['C / C++', 'VHDL', 'PCB (KiCad)', 'Python'];
-export const PINS_RIGHT = ['React', 'Node.js', 'TypeScript', 'Microcontrollers'];
+// `short` is shown on narrow screens so the chip keeps its pins on both sides.
+export const PINS_LEFT = [
+  { label: 'C / C++', short: 'C/C++' },
+  { label: 'VHDL', short: 'VHDL' },
+  { label: 'PCB (KiCad)', short: 'KiCad' },
+  { label: 'Python', short: 'Python' },
+];
+export const PINS_RIGHT = [
+  { label: 'React', short: 'React' },
+  { label: 'Node.js', short: 'Node' },
+  { label: 'TypeScript', short: 'TS' },
+  { label: 'Microcontrollers', short: 'MCUs' },
+];
 
 export const LANGUAGES = [
   { name: 'Dutch', level: 'Fluent' },

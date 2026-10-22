@@ -101,15 +101,34 @@ a:hover { color: #166534; }
 .lang { font-size: 13px; border: 1px solid var(--ink); padding: 6px 10px; }
 
 /* Pinout */
-.pinout { display: flex; flex-wrap: wrap; align-items: stretch; justify-content: center; margin-bottom: 40px; font-size: 15px; }
-.pins { flex: 1 1 240px; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: space-around; gap: 10px; }
-.pins li { display: flex; align-items: center; gap: 10px; }
+.pinout { display: flex; flex-wrap: nowrap; align-items: stretch; justify-content: center; margin-bottom: 40px; font-size: 15px; }
+.pins { flex: 1 1 0; min-width: 0; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: space-around; gap: 10px; }
+.pins li { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
 .pins-left li { justify-content: flex-end; }
-.pin-leg { width: 48px; height: 2px; background: var(--ink); }
+.pins-left { padding-right: 6px; }
+.pins-right { padding-left: 6px; }
+.pin-leg { width: 48px; height: 2px; background: var(--ink); flex: 0 0 auto; }
+.pin-short { display: none; }
 .chip-body { flex: 0 0 200px; background: var(--ink); color: #fff; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 32px 16px; min-height: 240px; position: relative; }
 .chip-notch { position: absolute; top: 14px; left: 14px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; }
 .chip-name { font-weight: 700; font-size: 26px; }
 .chip-pkg { font-size: 13px; color: var(--led-on); }
+@media (max-width: 760px) {
+  .pinout { font-size: 13px; }
+  .pins li { gap: 6px; }
+  .pin-leg { width: 22px; }
+  .chip-body { flex-basis: 120px; min-height: 200px; padding: 24px 8px; }
+  .chip-name { font-size: 18px; }
+  .chip-pkg { font-size: 11px; }
+}
+@media (max-width: 480px) {
+  .pin-full { display: none; }
+  .pin-short { display: inline; }
+  .pin-leg { width: 14px; }
+  .chip-body { flex-basis: 92px; min-height: 180px; }
+  .chip-name { font-size: 15px; }
+  .chip-notch { top: 10px; left: 10px; width: 9px; height: 9px; }
+}
 .skill-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); border-top: 2px solid var(--ink); }
 .skill-group { padding: 20px 16px 20px 0; border-bottom: 1px solid var(--rule); }
 .skill-group h3 { margin: 0 0 12px; font-size: 17px; font-weight: 600; }

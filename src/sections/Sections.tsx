@@ -99,15 +99,24 @@ export function About() {
   );
 }
 
+function PinLabel({ label, short }: { label: string; short: string }) {
+  return (
+    <span>
+      <span className="pin-full">{label}</span>
+      <span className="pin-short">{short}</span>
+    </span>
+  );
+}
+
 export function Pinout() {
   return (
     <section id="skills" className="wrap section">
       <h2 className="mono section-title">3 · PIN CONFIGURATION (SKILLS)</h2>
       <div className="mono pinout">
         <ul className="pins pins-left">
-          {PINS_LEFT.map((name, i) => (
-            <li key={name}>
-              {name} <span className="pin-leg" /> <b>{i + 1}</b>
+          {PINS_LEFT.map((pin, i) => (
+            <li key={pin.label}>
+              <PinLabel {...pin} /> <span className="pin-leg" /> <b>{i + 1}</b>
             </li>
           ))}
         </ul>
@@ -117,9 +126,9 @@ export function Pinout() {
           <span className="chip-pkg">8-PIN · DIP</span>
         </div>
         <ul className="pins pins-right">
-          {PINS_RIGHT.map((name, i) => (
-            <li key={name}>
-              <b>{PINS_LEFT.length * 2 - i}</b> <span className="pin-leg" /> {name}
+          {PINS_RIGHT.map((pin, i) => (
+            <li key={pin.label}>
+              <b>{PINS_LEFT.length * 2 - i}</b> <span className="pin-leg" /> <PinLabel {...pin} />
             </li>
           ))}
         </ul>
