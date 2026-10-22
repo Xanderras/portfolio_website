@@ -1,23 +1,26 @@
-import { CircuitBackground } from './components/CircuitBackground';
-import { Hero } from './components/Hero';
-import { About } from './components/About';
-import { Skills } from './components/Skills';
-import { Projects } from './components/Projects';
-import { Experience } from './components/Experience';
-import { Contact } from './components/Contact';
+import { useState, type CSSProperties } from 'react';
+import { LED_COLORS } from './lib/ledColors';
+import { About, Footer, Header, Hero, Pinout, Projects } from './sections/Sections';
+import { Experience } from './sections/Experience';
+import { Contact } from './sections/Contact';
 
 function App() {
+  const [colorIndex, setColorIndex] = useState(0);
+  const color = LED_COLORS[colorIndex];
+
   return (
-    <div className="relative min-h-screen bg-black">
-      <CircuitBackground />
-      <div className="relative z-10">
-        <Hero />
+    <div className="page" style={{ '--chip': color.chip, '--led-on': color.on, '--led-glow': color.glow } as CSSProperties}>
+      <a href="#about" className="skip-link">Skip to content</a>
+      <Header />
+      <main>
+        <Hero color={color} onColorChange={setColorIndex} />
         <About />
-        <Skills />
+        <Pinout />
         <Projects />
         <Experience />
         <Contact />
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 }
